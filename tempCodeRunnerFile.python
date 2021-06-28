@@ -1,0 +1,24 @@
+import easyocr
+import cv2
+import numpy
+reader = easyocr.Reader(['en'] , gpu= False)
+string="IMG"
+imageloc= 'C:\\Users\\Administrator\\Desktop\\SCAN'+string+'.jpg'
+query = reader.read(imageloc)
+print(query)
+import pytesseract as ts
+import pywhatkit as pwt
+from PIL import Image
+ts.pytesseract.tesseract_cmd=r'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe'
+s='int'
+def scanner(s):
+    string='/' + s
+    imageloc= 'C:\\Users\\Administrator\\Desktop\\SCAN'+string+'.jpg'
+    queryimg=Image.open(imageloc)
+    try:
+        query=ts.image_to_string(queryimg)
+        print(query)
+        pwt.search(query)
+    except:
+        print("GIVEN IMAGE IS'NT SCANNABLE")
+scanner(s)
